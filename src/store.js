@@ -33,8 +33,9 @@ const todoList = createSlice({
     initialState: [],
     reducers: {
         todoCreate: (state, action) => {
+            console.log(...action.payload)
+            //action.payload.tit = "";
             return [...state, ...action.payload]
-            // console.log(action.payload)
         },
         todoDelete: (state, action) => {
             return (
