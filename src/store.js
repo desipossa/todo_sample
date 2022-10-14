@@ -22,8 +22,6 @@ const todoList = createSlice({
         todoCreate: (state, action) => state.concat(action.payload),
         todoDelete: (state, action) => state.filter(it => it.id !== action.payload),
         todoModify: (state, action) => state.map(it => it.id === action.payload.id ? { ...action.payload } : it),
-
-        //todoModify: null
     }
 
 });

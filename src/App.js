@@ -21,10 +21,11 @@ const TodoCreate = () => {
   const handlerModify = e => {
     const { name, value } = e.target;
     dispatch(todoModify({ id: 1, ['tit']: "쉉됌" }));
-    console.log('수정 됌', todoList)
+
   }
   return (
     <>
+      {console.log('수정 됌', todoList)}
       <input onChange={handlerInputs} name='tit' />
       <input onChange={handlerInputs} name='coment' />
       <button onClick={handlerList}>WRITE</button>
