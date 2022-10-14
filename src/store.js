@@ -1,17 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const cnum = createSlice({
-    name: 'input',
-    initialState: 1,
-    reducers: {
-        up: state => {
-            return state += 1;
-        },
-    }
-});
-
-
-export const { up } = cnum.actions;
 
 
 const todoItm = createSlice({
@@ -19,10 +7,9 @@ const todoItm = createSlice({
     initialState: {},
     reducers: {
         inputs: (state, action) => {
-            return { ...state, ...action.payload }
+            return { ...action.payload }
         },
     }
-
 });
 
 export const { inputs } = todoItm.actions;
@@ -32,27 +19,21 @@ const todoList = createSlice({
     name: 'todoList',
     initialState: [],
     reducers: {
-        todoCreate: (state, action) => {
-            console.log(...action.payload)
-            //action.payload.tit = "";
-            return [...state, ...action.payload]
-        },
-        todoDelete: (state, action) => {
-            return (
-                [...state.filter(it => it.id !== action.payload)]
-            )
-        }
+        todoCreate: (state, action) => state.concat(action.payload),
+        todoDelete: (state, action) => state.filter(it => it.id !== action.payload),
+        todoModify: (state, action) => state.map(it => it.id === action.payload.id ? { ...action.payload } : it),
+
+        //todoModify: null
     }
 
 });
 
-export const { todoCreate, todoDelete } = todoList.actions;
+export const { todoCreate, todoDelete, todoModify } = todoList.actions;
 
 
 
 const store = configureStore({
     reducer: {
-        cnum: cnum.reducer,
         todoItm: todoItm.reducer,
         todoList: todoList.reducer
     }

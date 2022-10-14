@@ -1,17 +1,16 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { up, inputs, todoCreate, todoDelete } from "./store";
+import { inputs, todoCreate, todoDelete, todoModify } from "./store";
 
 const TodoCreate = () => {
   const num = useRef(1)
-  const { cnum, todoItm } = useSelector(it => it);
+  const { todoItm, todoList } = useSelector(it => it);
   const dispatch = useDispatch();
 
 
   const handlerInputs = (e) => {
     const { name, value } = e.target;
     dispatch(inputs({ ...todoItm, id: num.current, [name]: value }));
-
   }
 
   const handlerList = () => {
@@ -19,13 +18,17 @@ const TodoCreate = () => {
     num.current += 1;
 
   }
+  const handlerModify = e => {
+    const { name, value } = e.target;
+    dispatch(todoModify({ id: 1, ['tit']: "쉉됌" }));
+    console.log('수정 됌', todoList)
+  }
   return (
     <>
-      <div>{cnum}</div>
-      <button onClick={() => dispatch(up())}>+</button>
       <input onChange={handlerInputs} name='tit' />
       <input onChange={handlerInputs} name='coment' />
       <button onClick={handlerList}>WRITE</button>
+      <button onClick={handlerModify}>MODIFY</button>
     </>
 
   )
